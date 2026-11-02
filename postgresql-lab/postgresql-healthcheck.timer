@@ -1,0 +1,11 @@
+[Unit]
+Description=PostgreSQL Health Check Every 30 Seconds
+
+[Timer]
+OnActiveSec=30s
+OnUnitInactiveSec=30s
+AccuracySec=1s
+Unit=postgresql-healthcheck.service
+
+[Install]
+WantedBy=timers.target

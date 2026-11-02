@@ -1,0 +1,25 @@
+[Unit]
+Description=PostgeSQL 17 Docker Container
+Requires=docker.service
+After=docker.service network-online.target
+Wants=network-online.target
+StartLimitIntervalSec=60
+StartLimitBurst=3
+
+
+[Service]
+Type=simple
+Restart=on-failure
+RestartSec=5
+TimeoutStopSec=90
+
+ExecStartPre=-/usr/bin/docker rm postgresql
+
+ExecStart=/usr/bin/docker run --name postgresql --rm --user 980:977 --env-file /etc/postgresql.env -v /var/lib/postgresql/data:/var/lib/postgresql/data:Z postgres:17
+
+ExecStartPost=/usr/bin/timeout --signal=TERM --kill-after=2s 60s /usr/local/bin/postgresql-wait.sh
+
+ExecStop=/usr/bin/docker stop -t 60 postgresql
+
+[Install]
+WantedBy=multi-user.target

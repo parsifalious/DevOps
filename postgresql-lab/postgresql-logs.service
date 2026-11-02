@@ -1,0 +1,14 @@
+[Unit]
+Description=PostgreSQL Docker Log Collector
+Requires=docker.service
+After=docker.service postgresql.service
+Wants=postgresql.service
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/postgresql-logs.sh
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,7 @@
+[Unit]
+Description=PostgreSQL Health Check 
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/postgresql-healthcheck.sh
+TimeoutStartSec=10
