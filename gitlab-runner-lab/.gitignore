@@ -1,0 +1,15 @@
+# GitLab credentials
+.env
+.env.*
+*.token
+runner.json
+config.toml
+
+# Runner state
+config/
+state/
+*.lock
+
+# Temporary files
+*.log
+*.tmp
